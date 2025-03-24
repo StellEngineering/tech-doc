@@ -64,7 +64,7 @@ const AddLinkDropdown = ({ section, allSections, setLinks }) => {
         <button
             onClick={handleAddLink}
             disabled={!linkTarget}
-            style={{ padding: '5px 10px', cursor: linkTarget ? 'pointer' : 'not-allowed' }}
+            className={linkTarget ? 'add-link-button' : 'add-link-button disabled'}
         >
           Add Link
         </button>
@@ -83,6 +83,8 @@ const DocumentSection = ({ section, allSections, links, setLinks, selectedSectio
             margin: '20px 0',
             padding: '10px',
             border: '1px solid #ddd',
+            borderRadius: '8px',
+            boxShadow: '0 1px 5px 1px rgba(0, 0, 0, 0.05)',
             backgroundColor: selectedSectionId === section.id ? '#f0f8ff' : 'transparent',
             transition: 'background-color 0.3s ease'
           }}
