@@ -1,13 +1,39 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 a {
-  color: #0066cc;
+  color: #10cb81;
   text-decoration: none;
+  font-weight: 200;
+  transition: font-weight 0.3s ease;
 }
 
 a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  font-weight: 400;
+  transition: font-weight 0.3s ease;
+}
+
+.add-link-button {
+  background-color: #10cb81;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 1px 5px 1px rgba(0, 0, 0, 0.05);
+}
+
+.add-link-button:hover {
+  background-color: #009e60;
+}
+
+.add-link-button.disabled {
+  background-color: #FAFAFA;
+  cursor: not-allowed;
+  border-radius: 8px;
+  color: #524D4D;
 }

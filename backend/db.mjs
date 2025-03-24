@@ -40,9 +40,7 @@ db.serialize(() => {
   const documents = [
     { title: 'Document A', content: 'Overview of Document A' },
     { title: 'Document B', content: 'Overview of Document B' },
-    { title: 'Document C', content: 'Overview of Document C' },
-    { title: 'Document D', content: 'Overview of Document D' },
-    { title: 'Document E', content: 'Overview of Document E' },
+    { title: 'Document C', content: 'Overview of Document C' }
   ];
 
   const docIds = {};
@@ -64,15 +62,7 @@ db.serialize(() => {
 
     { doc: 'Document C', number: 1, title: '1C', content: 'Content of Section 1C' },
     { doc: 'Document C', number: 2, title: '2C', content: 'Content of Section 2C' },
-    { doc: 'Document C', number: 3, title: '3C', content: 'Content of Section 3C' },
-
-    { doc: 'Document D', number: 1, title: '1D', content: 'Content of Section 1D' },
-    { doc: 'Document D', number: 2, title: '2D', content: 'Content of Section 2D' },
-    { doc: 'Document D', number: 3, title: '3D', content: 'Content of Section 3D' },
-
-    { doc: 'Document E', number: 1, title: '1E', content: 'Content of Section 1E' },
-    { doc: 'Document E', number: 2, title: '2E', content: 'Content of Section 2E' },
-    { doc: 'Document E', number: 3, title: '3E', content: 'Content of Section 3E' }
+    { doc: 'Document C', number: 3, title: '3C', content: 'Content of Section 3C' }
   ];
 
   const sectionIds = {};
@@ -91,10 +81,7 @@ db.serialize(() => {
     { sourceDoc: 'Document B', sourceSec: 1, targetDoc: 'Document C', targetSec: 2, type: 'compliance' },
     { sourceDoc: 'Document B', sourceSec: 2, targetDoc: 'Document E', targetSec: 1, type: 'reference' },
     { sourceDoc: 'Document C', sourceSec: 1, targetDoc: 'Document D', targetSec: 2, type: 'reference' },
-    { sourceDoc: 'Document C', sourceSec: 2, targetDoc: 'Document A', targetSec: 3, type: 'dependency' },
-    { sourceDoc: 'Document D', sourceSec: 1, targetDoc: 'Document E', targetSec: 3, type: 'reference' },
-    { sourceDoc: 'Document E', sourceSec: 1, targetDoc: 'Document A', targetSec: 1, type: 'reference' },
-    { sourceDoc: 'Document E', sourceSec: 2, targetDoc: 'Document B', targetSec: 2, type: 'dependency' }
+    { sourceDoc: 'Document C', sourceSec: 2, targetDoc: 'Document A', targetSec: 3, type: 'dependency' }
   ];
 
   links.forEach(link => {
