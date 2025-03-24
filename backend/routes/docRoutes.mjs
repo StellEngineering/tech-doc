@@ -6,14 +6,11 @@ const router = express.Router();
 // Get all sections across all documents
 router.get('/sections', docController.getAllSections);
 
-// Document routes
+// Other document routes
 router.get('/:id/sections', docController.getSectionsForDocument);
 router.get('/:id/links', docController.getLinksForDocument);
 router.get('/:id', docController.getDocById);
 router.get('/', docController.getAllDocs);
-
-// Create a new link
-router.post('/links', docController.createLink);
 
 export default router;
 
