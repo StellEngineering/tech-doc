@@ -5,7 +5,6 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const Sidebar = () => {
   const [docs, setDocs] = useState([]);
-  const [search, setSearch] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,24 +14,13 @@ const Sidebar = () => {
     .catch(error => console.error("Error fetching documents:", error));
   }, []);
 
-  const filteredDocs = docs.filter(doc =>
-      doc.title.toLowerCase().includes(search.toLowerCase())
-  );
 
   return (
       <div style={styles.sidebar}>
         <h2 style={styles.title}>Documents</h2>
 
-        <input
-            type="text"
-            placeholder="Search documents..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={styles.searchInput}
-        />
-
         <ul style={styles.docList}>
-          {filteredDocs.map(doc => (
+          {docs.map(doc => (
               <li
                   key={doc.id}
                   style={styles.docItem}
@@ -62,16 +50,6 @@ const styles = {
     fontSize: '22px',
     textAlign: 'center',
     color: '#333'
-  },
-  searchInput: {
-    padding: '10px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-    outline: 'none',
-    transition: 'border 0.2s',
-    marginBottom: '15px',
-    width: '100%',
-    boxSizing: 'border-box'
   },
   docList: {
     listStyleType: 'none',
