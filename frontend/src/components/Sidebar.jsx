@@ -14,6 +14,7 @@ const Sidebar = () => {
     .catch(error => console.error("Error fetching documents:", error));
   }, []);
 
+
   return (
       <div style={styles.sidebar}>
         <h2 style={styles.title}>Documents</h2>

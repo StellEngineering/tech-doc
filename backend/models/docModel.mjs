@@ -73,3 +73,38 @@ export const getLinksForDocument = (documentId) => {
   });
 };
 
+export const createLink = (sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy) => {
+  const newLinkId = uuidv4(); // Generate a UUID for the new link
+
+  return new Promise((resolve, reject) => {
+    const query = `
+      INSERT INTO links (id, sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+    const params = [newLinkId, sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy];
+
+    db.run(query, params, function (err) {
+      if (err) {
+        reject(err);
+      } else {
+        const fetchQuery = `
+          SELECT 
+            links.*, 
+            targetSections.title as targetSectionTitle, 
+            targetDocuments.title as targetDocumentTitle
+          FROM links
+          LEFT JOIN sections as targetSections ON links.targetSectionId = targetSections.id
+          LEFT JOIN documents as targetDocuments ON links.targetDocumentId = targetDocuments.id
+          WHERE links.id = ?`;
+
+        db.get(fetchQuery, [newLinkId], (err, row) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(row);
+          }
+        });
+      }
+    });
+  });
+};

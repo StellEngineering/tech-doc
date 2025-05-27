@@ -48,4 +48,16 @@ export const getLinksForDocument = async (req, res) => {
   }
 };
 
+export const createLink = async (req, res) => {
+  try {
+    const { sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy } = req.body;
+
+    const newLink = await docModel.createLink(sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy);
+
+    res.json(newLink);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
