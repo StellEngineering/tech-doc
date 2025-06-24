@@ -98,4 +98,6 @@ router.get('/:id', docController.getDocById);
  */
 router.get('/', docController.getAllDocs);
 
+router.post('/links', docController.createDocLink)
+
 export default router;

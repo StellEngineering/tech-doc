@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { DocumentSection } from '../../components/DocumentSection'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -41,6 +42,14 @@ const DocumentPage = () => {
       <div>
         <h1>{activeDoc.title}</h1>
         <p>{activeDoc.content}</p>
+        <div style={{ display: 'flex', gap: '8px', flexDirection: 'column'}}>
+          { allSections.map((sectionData) => {
+            return (
+              <DocumentSection section={sectionData} links={links}></DocumentSection>
+            )
+          }) }
+        </div>
+
       </div>
   );
 };

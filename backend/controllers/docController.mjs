@@ -48,4 +48,11 @@ export const getLinksForDocument = async (req, res) => {
   }
 };
 
+export const createDocLink = async (req, res) => {
+  const data = req.body
+  
+  console.log(req)
+  res.status(200).json({ success: true })
+}
+
 

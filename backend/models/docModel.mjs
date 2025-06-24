@@ -40,15 +40,15 @@ export const getSectionsForDocument = (documentId) => {
 export const getAllSections = () => {
   return new Promise((resolve, reject) => {
     db.all(
-        `SELECT sections.*, documents.title as documentTitle FROM sections JOIN documents ON sections.documentId = documents.id`,
-        [],
-        (err, rows) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(rows);
-          }
+      `SELECT sections.*, documents.title as documentTitle FROM sections JOIN documents ON sections.documentId = documents.id`,
+      [],
+      (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
         }
+      }
     );
   });
 };
@@ -56,20 +56,23 @@ export const getAllSections = () => {
 export const getLinksForDocument = (documentId) => {
   return new Promise((resolve, reject) => {
     db.all(
-        `SELECT links.*, targetSections.title as targetSectionTitle, documents.title as targetDocumentTitle, targetSections.sectionNumber as targetSectionNumber 
+      `SELECT links.*, targetSections.title as targetSectionTitle, documents.title as targetDocumentTitle, targetSections.sectionNumber as targetSectionNumber 
        FROM links 
        JOIN sections as targetSections ON links.targetSectionId = targetSections.id 
        JOIN documents ON links.targetDocumentId = documents.id 
        WHERE links.sourceDocumentId = ?`,
-        [documentId],
-        (err, rows) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(rows);
-          }
+      [documentId],
+      (err, rows) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(rows);
         }
+      }
     );
   });
 };
 
+export const addDocumentLink = (sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType) => {
+  db.run('INSERT INTO links VALUES (sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId) ')
+})
