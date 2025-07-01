@@ -49,3 +49,25 @@ export const getLinksForDocument = async (req, res) => {
 };
 
 
+export const newLink = async (req, res) => {
+  try {
+    const source_doc_id = req.body.sourceDoumentId
+    const source_section_id = req.body.sourceSectionId
+    const target_doc_id = req.body.targetDoumentId
+    const target_section_id = req.body.targetSectionId 
+    const link_type = req.body.linkType
+    const created_by = req.body.createdBy 
+
+
+    const response = await docModel.setLink(source_doc_id,source_section_id,target_doc_id,target_section_id,link_type,created_by);
+    console.log(response)
+    console.log("hello)")
+    //get necessary ingo
+    //create Link = new Link()
+    //save link in db
+    //return link
+    res.json(response);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

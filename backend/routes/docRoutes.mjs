@@ -98,4 +98,61 @@ router.get('/:id', docController.getDocById);
  */
 router.get('/', docController.getAllDocs);
 
+
+/**
+ * @swagger
+ * /api/docs/links:
+ *   post:
+ *     tags: [Documents]
+ *     summary: Create a new document link
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - source_doc_id
+ *               - source_section_id
+ *               - target_doc_id
+ *               - target_section_id
+ *               - link_type
+ *               - created_by
+ *             properties:
+ *               source_doc_id:
+ *                 type: string
+ *                 format: uuid
+ *               source_section_id:
+ *                 type: string
+ *                 format: uuid
+ *               target_doc_id:
+ *                 type: string
+ *                 format: uuid
+ *               target_section_id:
+ *                 type: string
+ *                 format: uuid
+ *               link_type:
+ *                 type: string
+ *                 example: "reference"
+ *               created_by:
+ *                 type: string
+ *                 format: uuid
+ *     responses:
+ *       200:
+ *         description: Link created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                   format: uuid
+ *             example:
+ *               id: "c735f0a2-d021-4e5c-9f9b-62d445c4b80a"
+ *       400:
+ *         description: Invalid request body
+ */
+router.post('/links', docController.newLink)
+
 export default router;

@@ -73,3 +73,22 @@ export const getLinksForDocument = (documentId) => {
   });
 };
 
+export const setLink = (source_doc_id,source_section_id,target_doc_id,target_section_id,link_type,created_by) => {
+  return new Promise((resolve, reject) => {
+    const uuid = uuidv4();
+    const now = new Date();
+    db.run(
+        `INSERT INTO links (id, sourceDocumentId, sourceSectionId, targetDocumentId, targetSectionId, linkType, createdBy, createdAt) VALUES (?, ?, ?, ? ,? , ? , ? , ?)`,
+        [uuid,source_doc_id,source_section_id,target_doc_id,target_section_id,link_type,created_by, now],
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            console.log(uuid);
+            resolve({ id: uuid });
+          }
+        }
+    );
+  });
+};
+

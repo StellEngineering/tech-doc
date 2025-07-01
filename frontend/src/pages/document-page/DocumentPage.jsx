@@ -41,6 +41,19 @@ const DocumentPage = () => {
       <div>
         <h1>{activeDoc.title}</h1>
         <p>{activeDoc.content}</p>
+
+        {sections.map((value, key) => {
+          return (<div>
+            
+            {value.title} + {value.content}
+            <div>
+            {links.map((value, key) => {
+              return <div>{value.linkType} + {value.targetDocumentTitle} + {value.targetSectionTitle} </div>
+            })}
+            </div>
+            
+            </div>)
+        })}
       </div>
   );
 };
