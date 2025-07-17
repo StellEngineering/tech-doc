@@ -86,6 +86,9 @@ router.get('/:id/links', docController.getLinksForDocument);
  */
 router.get('/:id', docController.getDocById);
 
+
+router.post('/link/add', docController.addLink);
+
 /**
  * @swagger
  * /api/docs:

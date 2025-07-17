@@ -73,3 +73,31 @@ export const getLinksForDocument = (documentId) => {
   });
 };
 
+export const addLink = (documentId) => {
+  return new Promise((resolve, reject) => {
+    /*
+    db.run(
+      Select the links collection
+      insert the new link (passed through from docController function)
+      reject or resolve depending on if error occurs
+
+    )
+    */
+    db.run(
+        `SELECT links.*, targetSections.title as targetSectionTitle, documents.title as targetDocumentTitle, targetSections.sectionNumber as targetSectionNumber 
+       FROM links 
+       JOIN sections as targetSections ON links.targetSectionId = targetSections.id 
+       JOIN documents ON links.targetDocumentId = documents.id 
+       WHERE links.sourceDocumentId = ?`,
+        [documentId],
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows);
+          }
+        }
+    );
+  });
+};
+

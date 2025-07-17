@@ -1,10 +1,26 @@
 import * as docModel from '../models/docModel.mjs';
 
 export const getAllDocs = async (req, res) => {
+
+
+  
   try {
     const docs = await docModel.getAllDocs();
     res.json(docs);
   } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const addLink = async (req, res) => {
+  
+
+  
+  try {
+    console.log(req.body);
+    res.status(200).send()
+  } catch (err) {
+    console.log(err)
     res.status(500).json({ error: err.message });
   }
 };
