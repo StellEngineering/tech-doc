@@ -2,6 +2,8 @@
 
 A Python Flask implementation of the tech documentation backend, providing REST APIs for managing technical documentation with SQLite database.
 
+Please note that SQLite is in memory and any hot reloads of the app will invalidate previous UUIDs of entities.
+
 ## Prerequisites
 
 - Python 3.8 or higher
@@ -74,16 +76,16 @@ The application uses an in-memory SQLite database that is initialized with sampl
 
 ```
 backend-flask/
-├── app.py                  # Main Flask application
-├── config.py              # Configuration settings
-├── requirements.txt       # Python dependencies
-├── .env                  # Environment variables
-├── controllers/          # Request handlers
+├── app.py                 
+├── config.py              
+├── requirements.txt      
+├── .env                  
+├── controllers/          
 │   └── doc_controller.py
-├── models/              # Database models and operations
-│   ├── database.py     # Database initialization
-│   └── doc_model.py    # Document-related database operations
-└── routes/             # API route definitions
+├── models/              
+│   ├── database.py     
+│   └── doc_model.py    
+└── routes/             
     └── doc_routes.py
 ```
 
