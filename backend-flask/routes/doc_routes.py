@@ -169,3 +169,59 @@ def get_sections_for_document(doc_id):
 })
 def get_links_for_document(doc_id):
     return doc_controller.get_links_for_document(doc_id)
+
+## Create a new link between document sections
+@docs_bp.route('/links', methods=['POST'])
+@swag_from({
+    'tags': ['Documents'],
+    'summary': 'Create a new link between document sections',
+    'description': 'Creates a typed relationship between two document sections',
+    'parameters': [
+        {
+            'name': 'body',
+            'in': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'required': ['sourceDocumentId', 'sourceSectionId', 'targetDocumentId', 'targetSectionId', 'linkType', 'createdBy'],
+                'properties': {
+                    'sourceDocumentId': {'type': 'string', 'format': 'uuid', 'description': 'ID of the source document'},
+                    'sourceSectionId': {'type': 'string', 'format': 'uuid', 'description': 'ID of the source section'},
+                    'targetDocumentId': {'type': 'string', 'format': 'uuid', 'description': 'ID of the target document'},
+                    'targetSectionId': {'type': 'string', 'format': 'uuid', 'description': 'ID of the target section'},
+                    'linkType': {'type': 'string', 'enum': ['reference', 'compliance', 'dependency'], 'description': 'Type of link relationship'},
+                    'createdBy': {'type': 'string', 'description': 'User who created the link'}
+                }
+            }
+        }
+    ],
+    'responses': {
+        201: {
+            'description': 'Link created successfully',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'id': {'type': 'string', 'format': 'uuid'},
+                    'sourceDocumentId': {'type': 'string', 'format': 'uuid'},
+                    'sourceSectionId': {'type': 'string', 'format': 'uuid'},
+                    'targetDocumentId': {'type': 'string', 'format': 'uuid'},
+                    'targetSectionId': {'type': 'string', 'format': 'uuid'},
+                    'targetDocumentTitle': {'type': 'string'},
+                    'targetSectionTitle': {'type': 'string'},
+                    'targetSectionNumber': {'type': 'integer'},
+                    'linkType': {'type': 'string'},
+                    'createdBy': {'type': 'string'},
+                    'createdAt': {'type': 'string', 'format': 'date-time'}
+                }
+            }
+        },
+        400: {
+            'description': 'Bad request - missing or invalid fields'
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
+def create_link():
+    return doc_controller.create_link()
