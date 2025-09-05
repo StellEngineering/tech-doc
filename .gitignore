@@ -13,3 +13,22 @@ frontend/package-lock.json
 # Node.js dependencies
 node_modules/
 package-lock.json
+
+# Python dependencies and environments
+backend-flask/venv/
+backend-flask/__pycache__/
+backend-flask/**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Python IDE
+.vscode/
+*.egg-info/
