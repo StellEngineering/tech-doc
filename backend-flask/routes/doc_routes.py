@@ -169,3 +169,53 @@ def get_sections_for_document(doc_id):
 })
 def get_links_for_document(doc_id):
     return doc_controller.get_links_for_document(doc_id)
+
+@docs_bp.route('/<doc_id>/all_content', methods=['GET'])
+@swag_from({
+    'tags': ['Documents'],
+    'summary': 'Get all content for a document',
+    'parameters': [
+        {
+            'name': 'doc_id',
+            'in': 'path',
+            'type': 'string',
+            'required': True,
+            'description': 'Document ID (UUID format)'
+        }
+    ],
+    'responses': {
+        200: {
+            'description': 'All sections with their links',
+            'schema': {
+                'type': 'array',
+                'items': {
+                    'type': 'object',
+                    'properties': {
+                        'sectionTitle': {'type': 'string'},
+                        'sectionId': {'type': 'string', 'format': 'uuid'},
+                        'sectionNumber': {'type': 'integer'},
+                        'content': {'type': 'string'},
+                        'links': {
+                            'type': 'array',
+                            'items': {
+                                'type': 'object',
+                                'properties': {
+                                    'linkId': {'type': 'string', 'format': 'uuid'},
+                                    'sourceSectionId': {'type': 'string', 'format': 'uuid'},
+                                    'targetSectionId': {'type': 'string', 'format': 'uuid'},
+                                    'targetSectionTitle': {'type': 'string'},
+                                    'targetDocumentId': {'type': 'string', 'format': 'uuid'},
+                                    'targetDocumentTitle': {'type': 'string'},
+                                    'type': {'type': 'string'}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+})
+def get_all_content(doc_id):
+    # TODO IMPLEMENT
+    pass
