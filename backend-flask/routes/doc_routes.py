@@ -240,5 +240,8 @@ def get_links_for_document(doc_id):
     }
 })
 def get_all_content(doc_id):
-    # TODO IMPLEMENT
-    pass
+    try:
+        content = doc_controller.get_all_content(doc_id)
+        return jsonify(content), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
