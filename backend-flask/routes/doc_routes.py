@@ -1,6 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from flasgger import swag_from
 import controllers.doc_controller as doc_controller
+from controllers.doc_controller import DocumentNotFoundError
 
 docs_bp = Blueprint('docs', __name__)
 
@@ -27,7 +28,11 @@ docs_bp = Blueprint('docs', __name__)
     }
 })
 def get_all_docs():
-    return doc_controller.get_all_docs()
+    try:
+        docs = doc_controller.get_all_docs()
+        return jsonify(docs), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 ## Get a specific document by ID
 @docs_bp.route('/<doc_id>', methods=['GET'])
@@ -61,7 +66,13 @@ def get_all_docs():
     }
 })
 def get_doc_by_id(doc_id):
-    return doc_controller.get_doc_by_id(doc_id)
+    try:
+        doc = doc_controller.get_doc_by_id(doc_id)
+        return jsonify(doc), 200
+    except DocumentNotFoundError as e:
+        return jsonify({'error': str(e)}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 ## Get all sections across all documents
 @docs_bp.route('/sections', methods=['GET'])
@@ -90,7 +101,11 @@ def get_doc_by_id(doc_id):
     }
 })
 def get_all_sections():
-    return doc_controller.get_all_sections()
+    try:
+        sections = doc_controller.get_all_sections()
+        return jsonify(sections), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 ## Get sections for a specific document
 @docs_bp.route('/<doc_id>/sections', methods=['GET'])
@@ -126,7 +141,11 @@ def get_all_sections():
     }
 })
 def get_sections_for_document(doc_id):
-    return doc_controller.get_sections_for_document(doc_id)
+    try:
+        sections = doc_controller.get_sections_for_document(doc_id)
+        return jsonify(sections), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 ## Get links for a specific document
 @docs_bp.route('/<doc_id>/links', methods=['GET'])
@@ -168,7 +187,11 @@ def get_sections_for_document(doc_id):
     }
 })
 def get_links_for_document(doc_id):
-    return doc_controller.get_links_for_document(doc_id)
+    try:
+        links = doc_controller.get_links_for_document(doc_id)
+        return jsonify(links), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @docs_bp.route('/<doc_id>/all_content', methods=['GET'])
 @swag_from({

@@ -1,39 +1,22 @@
-from flask import jsonify
 import models.doc_model as doc_model
 
+class DocumentNotFoundError(Exception):
+    pass
+
 def get_all_docs():
-    try:
-        docs = doc_model.get_all_docs()
-        return jsonify(docs), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    return doc_model.get_all_docs()
 
 def get_doc_by_id(doc_id):
-    try:
-        doc = doc_model.get_doc_by_id(doc_id)
-        if not doc:
-            return jsonify({'error': 'Document not found'}), 404
-        return jsonify(doc), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    doc = doc_model.get_doc_by_id(doc_id)
+    if not doc:
+        raise DocumentNotFoundError('Document not found')
+    return doc
 
 def get_sections_for_document(doc_id):
-    try:
-        sections = doc_model.get_sections_for_document(doc_id)
-        return jsonify(sections), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    return doc_model.get_sections_for_document(doc_id)
 
 def get_all_sections():
-    try:
-        sections = doc_model.get_all_sections()
-        return jsonify(sections), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    return doc_model.get_all_sections()
 
 def get_links_for_document(doc_id):
-    try:
-        links = doc_model.get_links_for_document(doc_id)
-        return jsonify(links), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    return doc_model.get_links_for_document(doc_id)
