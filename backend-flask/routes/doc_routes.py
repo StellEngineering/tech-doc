@@ -200,12 +200,13 @@ def get_links_for_document(doc_id):
                             'items': {
                                 'type': 'object',
                                 'properties': {
-                                    'sectionId': {'type': 'string', 'format': 'uuid'},
-                                    'sectionTitle': {'type': 'string'},
-                                    'type': {'type': 'string'},
                                     'linkId': {'type': 'string', 'format': 'uuid'},
+                                    'sourceSectionId': {'type': 'string', 'format': 'uuid'},
+                                    'targetSectionId': {'type': 'string', 'format': 'uuid'},
+                                    'targetSectionTitle': {'type': 'string'},
                                     'targetDocumentId': {'type': 'string', 'format': 'uuid'},
-                                    'targetDocumentTitle': {'type': 'string'}
+                                    'targetDocumentTitle': {'type': 'string'},
+                                    'type': {'type': 'string'}
                                 }
                             }
                         }
